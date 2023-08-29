@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Board from "./Board"
+import Board from "./Board";
 
 const URL = "https://deckofcardsapi.com/api/";
 
@@ -32,15 +32,15 @@ function Game() {
   // responsible for getting the deck; called only on mount; sets deckId
   useEffect(function fetchDeckOnMount() {
     async function fetchDeck() {
-      const axiosResponse = await axios.get(`${URL}/deck/new/`);
+      const axiosResponse = await axios.get(`${URL}/deck/new/shuffle/?deck_count=1`);
       setDeckId(axiosResponse.data.deck_id);
     }
     fetchDeck();
-  }, [ ]);
+  }, []);
 
   return (
-    <Board deckId={deckId} card={card} getNewCard={fetchAndSetCard} />
-  )
+    <Board card={card} getNewCard={fetchAndSetCard} />
+  );
 
 }
 
